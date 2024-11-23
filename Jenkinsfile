@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ('GetProject') {
             steps {
-                git branch: 'master', url: 'https://github.com/SimonCuddihy/simonspetitions.git'
+                git branch: 'main', url: 'https://github.com/SimonCuddihy/simonspetitions.git'
             }
         }
         stage ('build') {
