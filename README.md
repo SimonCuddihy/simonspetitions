@@ -12,5 +12,3 @@ This project is a petition application where users can create, view, search, and
 - **Backend**: Java 17, Spring Boot, Maven
 - **CI/CD**: Jenkins with a GitHub webhook, deployed on Amazon EC2 with Tomcat
 
-## Getting Started
-To get started, clone the repository and follow the setup instructions in the [Setup](#setup) section.
