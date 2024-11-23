@@ -1,37 +1,33 @@
 pipeline {
     agent any
     stages {
-        stage ('GetProject') {
+        stage('GetProject') {
             steps {
                 git branch: 'main', url: 'https://github.com/SimonCuddihy/simonspetitions.git'
             }
         }
-        stage ('build') {
+        stage('Build') {
             steps {
-                sh 'mvn clean:clean'
+                sh 'mvn clean'
             }
         }
-        stage ('Package') {
-                    steps {
-                        sh 'mvn package'
-                    }
-                }
-        stage ('Archive')
-                {
-                    steps {
-                        archiveArtifacts allowEmptyArchive: true,
-                            artifacts: '**/simonspetitions*.war'
-                    }
-                }
-        stage ('Deploy')
-                {
-                    steps {
-                        sh 'docker build -f Dockerfile -t myapp . '
-                        sh 'docker rm -f "myappcontainer" || true'
-                        sh 'docker run --name "myappcontainer" -p 9090:8080 --detach myapp:latest'
-                    }
-                }
-
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage('Archive') {
+            steps {
+                archiveArtifacts allowEmptyArchive: true,
+                                 artifacts: '**/simonspetitions*.war'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'docker build -f Dockerfile -t myapp .'
+                sh 'docker rm -f "myappcontainer" || true'
+                sh 'docker run --name "myappcontainer" -p 9090:8080 --detach myapp:latest'
+            }
         }
     }
 }
