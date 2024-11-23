@@ -9,7 +9,7 @@
 <div id="homeContent"></div>
 <script>
     // Fetch data from the Spring Boot controller
-    fetch('/')
+    fetch('/home')
         .then(response => response.text())
         .then(data => {
             document.getElementById('homeContent').innerHTML = data;
