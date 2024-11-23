@@ -9,14 +9,29 @@ pipeline {
         stage ('build') {
             steps {
                 sh 'mvn clean:clean'
-                sh 'mvn dependency:copy-dependencies'
-                sh 'mvn compiler:compile'
             }
         }
-        stage ('Exec') {
-            steps {
-                sh 'mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=9090"'
-            }
+        stage ('Package') {
+                    steps {
+                        sh 'mvn package'
+                    }
+                }
+        stage ('Archive')
+                {
+                    steps {
+                        archiveArtifacts allowEmptyArchive: true,
+                            artifacts: '**/simonspetitions*.war'
+                    }
+                }
+        stage ('Deploy')
+                {
+                    steps {
+                        sh 'docker build -f Dockerfile -t myapp . '
+                        sh 'docker rm -f "myappcontainer" || true'
+                        sh 'docker run --name "myappcontainer" -p 9090:8080 --detach myapp:latest'
+                    }
+                }
+
         }
     }
 }
