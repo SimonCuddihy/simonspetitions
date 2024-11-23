@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Petitions Web App</title>
+</head>
+<body>
+<h1>Welcome to the Petitions Web App</h1>
+<div id="homeContent"></div>
+<script>
+    // Fetch data from the Spring Boot controller
+    fetch('/')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('homeContent').innerHTML = data;
+        })
+        .catch(error => console.error('Error:', error));
+</script>
+</body>
+</html>
