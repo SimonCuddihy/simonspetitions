@@ -9,7 +9,7 @@ This project is a petition application where users can create, view, search, and
 - Deployed using a CI/CD pipeline on an Amazon EC2 instance.
 
 ## Tech Stack
-- **Backend**: Java 17, Spring Boot, Maven
+- **Backend**: Java 21, Spring Boot, Maven
 - **CI/CD**: Jenkins with a GitHub webhook, deployed on Amazon EC2 with Tomcat
 
 test
