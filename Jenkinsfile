@@ -23,7 +23,7 @@ pipeline {
         stage('Archive') {
             steps {
                 archiveArtifacts allowEmptyArchive: true,
-                                 artifacts: '**/simonspetitions/*.war'
+                                 artifacts: '**/target/*.war'
             }
         }
         stage('Deploy') {
