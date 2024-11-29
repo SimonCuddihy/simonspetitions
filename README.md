@@ -11,5 +11,3 @@ This project is a petition application where users can create, view, search, and
 ## Tech Stack
 - **Backend**: Java 21, Spring Boot, Maven
 - **CI/CD**: Jenkins with a GitHub webhook, deployed on Amazon EC2 with Tomcat
-
-test 1
