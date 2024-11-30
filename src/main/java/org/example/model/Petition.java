@@ -37,6 +37,14 @@ public class Petition {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     // Signature methods
     public void addSignature(Signature signature) {
         signatures.add(signature);

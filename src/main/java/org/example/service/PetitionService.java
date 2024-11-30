@@ -4,6 +4,7 @@ import org.example.model.Petition;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PetitionService {
@@ -18,5 +19,18 @@ public class PetitionService {
 
     public List<Petition> getAllPetitions() {
         return new ArrayList<>(petitions);
+    }
+
+    public Optional<Petition> getPetitionById(Long id) {
+        return petitions.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst();
+    }
+
+    public List<Petition> searchPetitions(String query) {
+        return petitions.stream()
+                .filter(p -> p.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                        p.getDescription().toLowerCase().contains(query.toLowerCase()))
+                .toList();
     }
 }
