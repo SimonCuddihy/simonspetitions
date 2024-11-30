@@ -1,11 +1,16 @@
 package org.example.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Petition {
     private Long id;
     private String title;
 
     private String description;
     private String creator;
+
+    private List<Signature> signatures = new ArrayList<>();
 
     // Constructor
     public Petition(Long id, String title, String description, String creator) {
@@ -31,4 +36,14 @@ public class Petition {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    // Signature methods
+    public void addSignature(Signature signature) {
+        signatures.add(signature);
+    }
+
+    public List<Signature> getSignatures() {
+        return signatures;
+    }
+
 }
