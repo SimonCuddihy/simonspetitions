@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.model.Petition;
+import org.example.model.Signature;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,4 +34,20 @@ public class PetitionService {
                         p.getDescription().toLowerCase().contains(query.toLowerCase()))
                 .toList();
     }
+
+    public PetitionService() {
+        // sample data
+        createPetition("Save the Parks", "Protect our local parks from development", "John Doe");
+        createPetition("Better Public Transport", "Improve bus services in our city", "Jane Smith");
+    }
+
+    public boolean signPetition(Long petitionId, String name, String email) {
+        Optional<Petition> petition = getPetitionById(petitionId);
+        if (petition.isPresent()) {
+            petition.get().getSignatures().add(new Signature(name, email));
+            return true;
+        }
+        return false;
+    }
+
 }
