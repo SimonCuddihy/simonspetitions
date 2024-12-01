@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,5 +37,23 @@ public class PetitionController {
                                  @RequestParam String creator) {
         petitionService.createPetition(title, description, creator);
         return "redirect:/petitions";
+    }
+
+    @GetMapping("/petition/{id}")
+    public String viewPetition(@PathVariable Long id, Model model) {
+        var petition = petitionService.getPetitionById(id);
+        if (petition.isPresent()) {
+            model.addAttribute("petition", petition.get());
+            return "view-petition";
+        }
+        return "redirect:/petitions";
+    }
+
+    @PostMapping("/petition/{id}/sign")
+    public String signPetition(@PathVariable Long id,
+                               @RequestParam String name,
+                               @RequestParam String email) {
+        petitionService.signPetition(id, name, email);
+        return "redirect:/petition/" + id;
     }
 }
