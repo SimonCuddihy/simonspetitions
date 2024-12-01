@@ -12,7 +12,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean'
+                sh 'mvn clean compile'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
             }
         }
         stage('Package') {
@@ -23,7 +28,12 @@ pipeline {
         stage('Archive') {
             steps {
                 archiveArtifacts allowEmptyArchive: true,
-                                 artifacts: '**/target/*.war'
+                                artifacts: '**/target/*.war'
+            }
+        }
+        stage('Approve Deployment') {
+            steps {
+                input message: 'Deploy to production?', ok: 'Deploy'
             }
         }
         stage('Deploy') {
