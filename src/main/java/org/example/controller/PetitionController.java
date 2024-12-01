@@ -1,13 +1,11 @@
 package org.example.controller;
 
+import org.example.model.Petition;
 import org.example.service.PetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PetitionController {
@@ -55,5 +53,17 @@ public class PetitionController {
                                @RequestParam String email) {
         petitionService.signPetition(id, name, email);
         return "redirect:/petition/" + id;
+    }
+
+    @GetMapping("/search")
+    public String searchForm() {
+        return "search";
+    }
+
+    @PostMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        model.addAttribute("petitions", petitionService.searchPetitions(query));
+        model.addAttribute("query", query);
+        return "search-results";
     }
 }

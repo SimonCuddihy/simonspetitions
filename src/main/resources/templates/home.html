@@ -2,13 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Welcome to Petitions</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<div class="container">
 <h1>Welcome to Petitions</h1>
 <nav>
     <a th:href="@{/petitions}">View All Petitions</a>
     <a th:href="@{/petition/new}">Create New Petition</a>
     <a th:href="@{/search}">Search Petitions</a>
 </nav>
+</div>
 </body>
 </html>
