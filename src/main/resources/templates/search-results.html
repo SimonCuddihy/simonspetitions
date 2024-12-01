@@ -5,25 +5,28 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Search Results</h1>
-<p>Results for: <span th:text="${query}">search term</span></p>
+<div class="container">
+    <h1>Search Results</h1>
+    <p class="search-query">Results for: <span th:text="${query}">search term</span></p>
 
-<div th:if="${petitions.empty}">
-    <p>No petitions found matching your search.</p>
-</div>
-
-<div th:unless="${petitions.empty}">
-    <div th:each="petition : ${petitions}">
-        <h2 th:text="${petition.title}">Petition Title</h2>
-        <p th:text="${petition.description}">Description</p>
-        <p>Created by: <span th:text="${petition.creator}">Creator</span></p>
-        <a th:href="@{/petition/{id}(id=${petition.id})}">View Details</a>
+    <div th:if="${petitions.empty}" class="no-results">
+        <p>No petitions found matching your search.</p>
     </div>
-</div>
 
-<div>
-    <a th:href="@{/search}">New Search</a>
-    <a th:href="@{/}">Back to Home</a>
+    <div th:unless="${petitions.empty}" class="petitions-list">
+        <div th:each="petition : ${petitions}" class="petition-card">
+            <h2 th:text="${petition.title}">Petition Title</h2>
+            <p class="description" th:text="${petition.description}">Description</p>
+            <p class="creator">Created by: <span th:text="${petition.creator}">Creator</span></p>
+            <p class="signatures">Signatures: <span th:text="${petition.signatures.size()}">0</span></p>
+            <a th:href="@{/petition/{id}(id=${petition.id})}" class="button">View Details</a>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <a th:href="@{/search}" class="button">New Search</a>
+        <a th:href="@{/}" class="button button-secondary">Back to Home</a>
+    </div>
 </div>
 </body>
 </html>

@@ -5,17 +5,20 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<h1>Search Petitions</h1>
-
-<form th:action="@{/search}" method="post">
-    <div>
-        <label for="query">Search Term:</label>
-        <input type="text" id="query" name="query" required
-               placeholder="Enter keywords to search...">
-    </div>
-    <button type="submit">Search</button>
-</form>
-
-<a th:href="@{/}">Back to Home</a>
+<div class="container">
+    <h1>Search Petitions</h1>
+    <form th:action="@{/search}" method="post" class="form">
+        <div class="form-group">
+            <label for="query">Search Term:</label>
+            <input type="text" id="query" name="query" required
+                   class="form-control"
+                   placeholder="Enter keywords to search...">
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="button">Search</button>
+            <a th:href="@{/}" class="button button-secondary">Back to Home</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>
