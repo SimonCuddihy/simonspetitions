@@ -6,9 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 @Controller
 public class PetitionController {
+    private static final Logger logger = LoggerFactory.getLogger(PetitionController.class);
 
     @Autowired
     private PetitionService petitionService;
@@ -20,8 +25,16 @@ public class PetitionController {
 
     @GetMapping("/petitions")
     public String listPetitions(Model model) {
-        model.addAttribute("petitions", petitionService.getAllPetitions());
-        return "petitions";
+        try {
+            logger.info("Fetching all petitions");
+            List<Petition> petitions = petitionService.getAllPetitions();
+            logger.info("Found {} petitions", petitions.size());
+            model.addAttribute("petitions", petitions);
+            return "petitions";
+        } catch (Exception e) {
+            logger.error("Error fetching petitions", e);
+            throw e;
+        }
     }
 
     @GetMapping("/petition/new")
