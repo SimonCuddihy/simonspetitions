@@ -1,8 +1,13 @@
 package org.example.model;
 
+/**
+ * Represents a signature on a petition.
+ * Contains the name and email of the person signing.
+ */
+
 public class Signature {
-    private String name;
-    private String email;
+    private String name; // Name of the person signing the petition
+    private String email; //Email of the person signing the petition
 
     public Signature(String name, String email) {
         this.name = name;

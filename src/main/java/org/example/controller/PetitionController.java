@@ -11,6 +11,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+/**
+ * Controller handling web requests for the petition application.
+ * Maps URLs to appropriate handler methods and manages view resolution.
+ */
+
 @Controller
 public class PetitionController {
     private static final Logger logger = LoggerFactory.getLogger(PetitionController.class);
@@ -18,11 +23,13 @@ public class PetitionController {
     @Autowired
     private PetitionService petitionService;
 
+    //Displays the home page
     @GetMapping("/")
     public String home() {
         return "home";
     }
 
+    //Displays all petitions in the system
     @GetMapping("/petitions")
     public String listPetitions(Model model) {
         try {
@@ -42,6 +49,7 @@ public class PetitionController {
         return "create-petition";
     }
 
+    // Handles creating a new petition
     @PostMapping("/petition/new")
     public String createPetition(@RequestParam String title,
                                  @RequestParam String description,
@@ -60,6 +68,7 @@ public class PetitionController {
         return "redirect:/petitions";
     }
 
+    // Handles the signing of a petition
     @PostMapping("/petition/{id}/sign")
     public String signPetition(@PathVariable Long id,
                                @RequestParam String name,
@@ -73,6 +82,7 @@ public class PetitionController {
         return "search";
     }
 
+    // Searching for a petition
     @PostMapping("/search")
     public String search(@RequestParam String query, Model model) {
         model.addAttribute("petitions", petitionService.searchPetitions(query));

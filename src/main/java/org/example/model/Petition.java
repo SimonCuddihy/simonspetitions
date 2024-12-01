@@ -3,13 +3,18 @@ package org.example.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a petition in the system.
+ * Contains petition details and a list of signatures.
+ */
+
 public class Petition {
-    private Long id;
-    private String title;
+    private Long id; // Unique identifier for the petition
+    private String title; // title of petition
+    private String description; // descroption of the petition
+    private String creator; // Name of person who created the petition
 
-    private String description;
-    private String creator;
-
+    // List of signatures on the petition
     private List<Signature> signatures = new ArrayList<>();
 
     // Constructor

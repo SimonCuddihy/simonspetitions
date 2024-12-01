@@ -7,9 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class handles petition-related business logic.
+ * Manages the creation, storage, and retrieval of petitions.
+ */
+
 @Service
 public class PetitionService {
+    //In-memory storage of petitions
     private List<Petition> petitions = new ArrayList<>();
+    // Counter for generating petition IDs
     private Long nextId = 1L;
 
     public Petition createPetition(String title, String description, String creator) {
@@ -39,6 +46,7 @@ public class PetitionService {
         // sample data
         createPetition("Save the Parks", "Protect our local parks from development", "John Doe");
         createPetition("Better Public Transport", "Improve bus services in our city", "Jane Smith");
+        createPetition("Build Ring Road in the city", "Decrease congestion in the city", "John Smith");
     }
 
     public boolean signPetition(Long petitionId, String name, String email) {
