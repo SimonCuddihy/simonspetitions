@@ -11,6 +11,6 @@
     <p>Created by: <span th:text="${petition.creator}">Creator</span></p>
     <a th:href="@{/petition/{id}(id=${petition.id})}">View Details</a>
 </div>
-<a href="/">Back to Home</a>
+<a th:href="@{/}">Back to Home</a>
 </body>
 </html>
